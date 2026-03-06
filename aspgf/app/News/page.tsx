@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { newsData, Category, NewsItem } from "@/Components/newsData";
+import { newsData, Category, NewsItem } from "@/data/newsData";
 import Image from "next/image";
 import {
   FiCalendar,
@@ -155,11 +155,10 @@ export default function NewsEvents() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`${nunito.className} text-lg transition ${
-                activeCategory === cat
-                  ? "font-bold text-[#0f766e]"
+              className={`${nunito.className} text-lg transition ${activeCategory === cat
+                  ? "font-extrabold text-[#0f766e]"
                   : "text-black"
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -180,13 +179,15 @@ export default function NewsEvents() {
               className="card group relative rounded-2xl overflow-hidden cursor-pointer shadow-lg"
               onClick={() => setSelectedIndex(index)}
             >
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={500}
-                height={380}
-                className="w-full h-[380px] object-cover transition-transform duration-500 group-hover:scale-110"
-              />
+              <div className="relative w-full overflow-hidden bg-white">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={500}
+                  height={700}
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
 
               {/* OVERLAY */}
               <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white">
@@ -205,7 +206,7 @@ export default function NewsEvents() {
                 </p>
 
                 <h3
-                  className={`${nunito.className} text-lg font-semibold text-center`}
+                  className={`${nunito.className} text-lg font-bold text-center`}
                 >
                   {item.title}
                 </h3>
@@ -318,8 +319,8 @@ export default function NewsEvents() {
                 transform: `scale(${zoom}) translateY(${panY}px)`,
                 maxWidth:
                   typeof window !== "undefined" &&
-                  showInfo &&
-                  window.innerWidth > 768
+                    showInfo &&
+                    window.innerWidth > 768
                     ? "calc(100% - 450px)"
                     : "100%",
               }}
@@ -342,7 +343,7 @@ export default function NewsEvents() {
             `}
             onClick={(e) => e.stopPropagation()}
           >
-             {/* Small Dismiss Icon */}
+            {/* Small Dismiss Icon */}
             <button
               onClick={() => setShowInfo(false)}
               className="absolute top-4 right-4 p-2 text-white/30 hover:text-white transition-colors z-[10005] md:hidden"

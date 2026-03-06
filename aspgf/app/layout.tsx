@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Anuja Sushant Patil Global Foundation",
+  description: "Empowering change through kindness and community support.",
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -26,15 +31,19 @@ export default function RootLayout({
       >
         {/* Prevent horizontal overflow globally */}
         <div className="relative w-full overflow-x-hidden">
+
           {/* Fixed Header */}
           <div className="fixed inset-x-0 top-0 z-50">
             <Navbar />
           </div>
 
           {/* Page Content */}
-          <main className="pt-20 md:pt-28 w-full">{children}</main>
+          <main className="pt-20 md:pt-28 w-full">
+            {children}
+          </main>
 
           <Footer />
+
         </div>
       </body>
     </html>
