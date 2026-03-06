@@ -22,7 +22,7 @@ export function Navbar() {
     { name: "Home", href: "/" },
     { name: "About Us", href: "/AboutUS" },
     { name: "Our Work", href: "/OurWork" },
-    { name: "News", href: "/news" },
+    { name: "News", href: "/News" },
     { name: "Impact", href: "/Impact" },
   ];
 
@@ -105,10 +105,11 @@ export function Navbar() {
                 <li key={link.name} className="transition-colors group">
                   <Link
                     href={link.href}
-                    className={`cursor-pointer whitespace-nowrap transition-all duration-300 ${isActive
-                      ? "text-white font-extrabold"
-                      : "text-white/70 hover:text-white font-bold"
-                      }`}
+                    className={`cursor-pointer whitespace-nowrap transition-all duration-300 ${
+                      isActive
+                        ? "text-white font-extrabold"
+                        : "text-white/70 hover:text-white font-bold"
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -143,15 +144,17 @@ export function Navbar() {
 
       {/* MOBILE MENU OVERLAY */}
       <div
-        className={`md:hidden fixed inset-0 bg-[#00000080] backdrop-blur-sm transition-all duration-300 z-[105] ${isMenuOpen
-          ? "opacity-100 pointer-events-auto"
-          : "opacity-0 pointer-events-none"
-          }`}
+        className={`md:hidden fixed inset-0 bg-[#00000080] backdrop-blur-sm transition-all duration-300 z-[105] ${
+          isMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }`}
         onClick={() => setIsMenuOpen(false)}
       />
       <div
-        className={`md:hidden fixed top-0 right-0 h-full w-[75%] bg-white shadow-2xl transition-transform duration-500 ease-in-out z-[106] ${isMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`md:hidden fixed top-0 right-0 h-full w-[75%] bg-white shadow-2xl transition-transform duration-500 ease-in-out z-[106] ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="p-8 pt-24 flex flex-col h-full">
           <ul className="flex flex-col gap-8 mb-12">
@@ -161,18 +164,20 @@ export function Navbar() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className={`${nunito.className} text-xl font-extrabold transition-colors flex items-center justify-between group ${isActive
-                      ? "text-[#00735C]"
-                      : "text-[#1A2E35] hover:text-[#00735C]"
-                      }`}
+                    className={`${nunito.className} text-xl font-extrabold transition-colors flex items-center justify-between group ${
+                      isActive
+                        ? "text-[#00735C]"
+                        : "text-[#1A2E35] hover:text-[#00735C]"
+                    }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.name}
                     <div
-                      className={`w-2 h-2 rounded-full bg-[#00735C] transition-opacity ${isActive
-                        ? "opacity-100"
-                        : "opacity-0 group-hover:opacity-100"
-                        }`}
+                      className={`w-2 h-2 rounded-full bg-[#00735C] transition-opacity ${
+                        isActive
+                          ? "opacity-100"
+                          : "opacity-0 group-hover:opacity-100"
+                      }`}
                     />
                   </Link>
                 </li>
