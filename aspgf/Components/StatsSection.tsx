@@ -1,141 +1,107 @@
 "use client";
 
-import { JSX, useEffect, useRef } from "react";
-import { LineChart, Lightbulb, ThumbsUp } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { TrendingUp, Lightbulb, ThumbsUp } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Lexend } from "next/font/google";
+import { Nunito, Cabin } from "next/font/google";
 
-const lexend = Lexend({ subsets: ["latin"], weight: ["200", "500", "700"] });
+const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800", "900"] });
+const cabin = Cabin({ subsets: ["latin"] });
 
-export default function StatsSection(): JSX.Element {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const statRefs = useRef<HTMLDivElement[]>([]);
+const statsData = [
+  {
+    id: 1,
+    icon: <TrendingUp className="w-8 h-8 text-[#00735C]" />,
+    value: 98,
+    suffix: "%",
+    label: "Beneficiaries Reached",
+  },
+  {
+    id: 2,
+    icon: <Lightbulb className="w-8 h-8 text-[#00735C]" />,
+    value: 1265,
+    suffix: "+",
+    label: "Families Benefited",
+  },
+  {
+    id: 3,
+    icon: <ThumbsUp className="w-8 h-8 text-[#00735C]" />,
+    value: 36,
+    suffix: "k",
+    label: "Students Supported",
+  },
+];
+
+export default function StatsSection() {
+  const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
-
     gsap.registerPlugin(ScrollTrigger);
 
-    const ctx = gsap.context(() => {
-      // Fade + Slide Animation (trigger on scroll)
-      gsap.from(statRefs.current, {
+    const stats = statsRefs.current;
+
+    stats.forEach((stat, index) => {
+      if (!stat) return;
+
+      const targetValue = statsData[index].value;
+      const counterObj = { val: 0 };
+      const counterDisplay = stat.querySelector(".counter-value");
+
+      gsap.to(counterObj, {
+        val: targetValue,
+        duration: 2,
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%", // when section reaches 80% of viewport
+          trigger: stat,
+          start: "top 85%",
           toggleActions: "play none none none",
         },
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.3,
-        ease: "power3.out",
+        onUpdate: () => {
+          if (counterDisplay) {
+            counterDisplay.textContent = Math.floor(counterObj.val).toString();
+          }
+        },
       });
 
-      // Counter Animation (trigger on scroll)
-      statRefs.current.forEach((el) => {
-        const numberEl = el.querySelector<HTMLHeadingElement>(".counter");
-        if (!numberEl) return;
-
-        const finalValue = numberEl.dataset.value;
-        if (!finalValue) return;
-
-        const numericValue = parseInt(finalValue.replace(/\D/g, ""), 10);
-        const suffix = finalValue.replace(/[0-9]/g, "");
-
-        gsap.fromTo(
-          numberEl,
-          { innerText: 0 },
-          {
-            innerText: numericValue,
-            duration: 2,
-            ease: "power1.out",
-            snap: { innerText: 1 },
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-            onUpdate: function () {
-              const value = Math.floor(
-                Number((this.targets()[0] as HTMLElement).innerText),
-              );
-              numberEl.innerText = value + suffix;
-            },
-          },
-        );
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
+      // Fade in and slide up animation for the card
+      gsap.fromTo(stat,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: stat,
+            start: "top 90%",
+          }
+        }
+      );
+    });
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-white py-12 md:pt-16 md:pb-24">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 text-center gap-12 md:gap-16 px-6">
-        {/* Stat 1 */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-24">
+      {statsData.map((stat, index) => (
         <div
-          ref={(el) => {
-            if (el) statRefs.current[0] = el;
-          }}
-          className="flex flex-col items-center group"
+          key={stat.id}
+          ref={(el) => { statsRefs.current[index] = el; }}
+          className="flex flex-col items-center"
         >
-          <div className="w-20 h-20 rounded-full border-[3px] border-[#00735C] flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-110 shadow-sm">
-            <LineChart className="text-[#00735C] text-2xl" />
+          <div className="w-16 h-16 rounded-full border-2 border-[#00735C]/30 flex items-center justify-center mb-6 shadow-sm">
+            {stat.icon}
           </div>
-          <h2
-            className={`${lexend.className} counter text-[64px] font-black text-[#1A2E35] leading-none mb-3`}
-            data-value="98%"
-          >
-            0
-          </h2>
-          <p className={`${lexend.className} text-gray-500 font-bold uppercase tracking-[0.2em] text-[13px]`}>
-            Company Success
-          </p>
-        </div>
 
-        {/* Stat 2 */}
-        <div
-          ref={(el) => {
-            if (el) statRefs.current[1] = el;
-          }}
-          className="flex flex-col items-center group"
-        >
-          <div className="w-20 h-20 rounded-full border-[3px] border-[#00735C] flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-110 shadow-sm">
-            <Lightbulb className="text-[#00735C] text-2xl" />
+          <div className={`${nunito.className} text-4xl md:text-5xl font-black text-[#1A2E35] mb-2 flex items-baseline`}>
+            <span className="counter-value">0</span>
+            <span>{stat.suffix}</span>
           </div>
-          <h2
-            className={`${lexend.className} counter text-[64px] font-black text-[#1A2E35] leading-none mb-3`}
-            data-value="565+"
-          >
-            0
-          </h2>
-          <p className={`${lexend.className} text-gray-500 font-bold uppercase tracking-[0.2em] text-[13px]`}>
-            Company Strategies
-          </p>
-        </div>
 
-        {/* Stat 3 */}
-        <div
-          ref={(el) => {
-            if (el) statRefs.current[2] = el;
-          }}
-          className="flex flex-col items-center group"
-        >
-          <div className="w-20 h-20 rounded-full border-[3px] border-[#00735C] flex items-center justify-center mb-8 transition-transform duration-300 group-hover:scale-110 shadow-sm">
-            <ThumbsUp className="text-[#00735C] text-2xl" />
-          </div>
-          <h2
-            className={`${lexend.className} counter text-[64px] font-black text-[#1A2E35] leading-none mb-3`}
-            data-value="36k"
-          >
-            0
-          </h2>
-          <p className={`${lexend.className} text-gray-500 font-bold uppercase tracking-[0.2em] text-[13px]`}>
-            Complete Projects
+          <p className={`${cabin.className} text-gray-500 font-bold uppercase tracking-wider text-xs md:text-sm`}>
+            {stat.label}
           </p>
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }

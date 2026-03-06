@@ -2,18 +2,13 @@
 
 import React from "react";
 import { Search, ChevronDown } from "lucide-react";
-import { Manrope, Nunito } from "next/font/google";
+import { Manrope, Nunito, Cabin } from "next/font/google";
 
 const manrope = Manrope({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800"] });
+const cabin = Cabin({ subsets: ["latin"] });
 
-const categories = [
-    "All Category",
-    "Education",
-    "Charity",
-    "Old Age",
-    "Orphanage",
-];
+import { workCategories } from "@/data/ourWorkData";
 
 interface OurWorkSidebarProps {
     activeCategory: string;
@@ -31,7 +26,7 @@ export default function OurWorkSidebar({
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-        <aside className={`${manrope.className} w-full md:w-[220px] shrink-0`}>
+        <aside className={`${cabin.className} w-full md:w-[220px] shrink-0`}>
             {/* Search */}
             <div className="relative mb-4 md:mb-8">
                 <Search
@@ -57,7 +52,7 @@ export default function OurWorkSidebar({
                 <div className="md:hidden mb-4 relative">
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="w-full flex items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-bold text-[#1A2E35] shadow-sm transition-all focus:border-[#00735C]"
+                        className={`${nunito.className} w-full flex items-center justify-between rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-bold text-[#1A2E35] shadow-sm transition-all focus:border-[#00735C]`}
                     >
                         <span>{activeCategory}</span>
                         <ChevronDown size={16} className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
@@ -65,14 +60,14 @@ export default function OurWorkSidebar({
 
                     {isOpen && (
                         <div className="absolute z-[50] mt-2 w-full rounded-xl border border-gray-100 bg-white shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                            {categories.map((cat) => (
+                            {workCategories.map((cat: string) => (
                                 <button
                                     key={cat}
                                     onClick={() => {
                                         onCategoryChange(cat);
                                         setIsOpen(false);
                                     }}
-                                    className={`w-full text-left px-4 py-3 text-sm font-semibold transition-colors ${activeCategory === cat
+                                    className={`${nunito.className} w-full text-left px-4 py-3 text-sm font-semibold transition-colors ${activeCategory === cat
                                         ? "bg-[#00735C]/5 text-[#00735C]"
                                         : "text-gray-600 hover:bg-gray-50 hover:text-[#00735C]"
                                         }`}
@@ -86,13 +81,13 @@ export default function OurWorkSidebar({
 
                 {/* Desktop List */}
                 <ul className="hidden md:block space-y-1">
-                    {categories.map((cat) => {
+                    {workCategories.map((cat: string) => {
                         const isActive = activeCategory === cat;
                         return (
                             <li key={cat}>
                                 <button
                                     onClick={() => onCategoryChange(cat)}
-                                    className={`w-full text-left px-3 py-2 text-sm font-semibold transition-all duration-200 rounded-r-md border-l-2 ${isActive
+                                    className={`${nunito.className} w-full text-left px-3 py-2 text-sm font-semibold transition-all duration-200 rounded-r-md border-l-2 ${isActive
                                         ? "border-[#00735C] text-[#00735C] bg-[#00735C]/5"
                                         : "border-transparent text-gray-500 hover:text-[#00735C] hover:border-[#00735C]/30"
                                         }`}

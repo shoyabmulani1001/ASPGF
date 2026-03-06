@@ -27,7 +27,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:31 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w",
         isFeatured: true
     },
     {
@@ -37,7 +37,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:16 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 3,
@@ -46,7 +46,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:31 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 4,
@@ -55,7 +55,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:12 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 5,
@@ -64,7 +64,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:34 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 6,
@@ -73,7 +73,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:12 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 7,
@@ -82,7 +82,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "1:10 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     },
     {
         id: 8,
@@ -91,7 +91,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:46 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/cETv_Xt6OQs?si=v_q-0mHdnRsVwxB0"
     },
     {
         id: 9,
@@ -100,6 +100,6 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:12 min",
-        videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
     }
 ];
