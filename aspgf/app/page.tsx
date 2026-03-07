@@ -7,10 +7,9 @@ import StatsSection from "@/Components/StatsSection";
 import FoundersSectionMain from "@/Components/FoundersSectionMain";
 import AboutSection from "@/Components/AboutSection";
 import WhatWeDoSection from "@/Components/WhatWeDoSection";
-// import FoundersSectionMain from "@/Components/FoundersSectionMain";
+import NewsSection from "@/Components/NewsSection";
 
-
-// import ContactUs from "@/app/contactUs/ContactUs";StatsSection 
+// import ContactUs from "@/app/contactUs/ContactUs";StatsSection
 
 export default function Page() {
   return (
@@ -26,8 +25,9 @@ export default function Page() {
         </div>
       </section>
       <FoundersSectionMain />
-      <FAQSection />
+      <NewsSection/>
 
+      <FAQSection />
     </>
   );
 }
