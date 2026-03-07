@@ -19,11 +19,7 @@ export default function Page() {
       <FocusArea />
 
       <WhatWeDoSection />
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto py-12">
-          <StatsSection />
-        </div>
-      </section>
+      <StatsSection />
       <FoundersSectionMain />
       <NewsSection/>
 
