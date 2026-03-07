@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Caveat, Nunito, Cabin } from "next/font/google";
-import { MapPin, Play, X } from "lucide-react";
+import { MapPin, Play, X, ChevronLeft, ChevronRight } from "lucide-react";
 import StatsSection from "../StatsSection";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,6 +25,15 @@ export default function ImpactComponent() {
     const stackedVideos = videoStories.filter(v => v.id === 2 || v.id === 3);
     const gridVideos = videoStories.filter(v => v.id > 3);
 
+    const ITEMS_PER_PAGE = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const totalPages = Math.ceil(gridVideos.length / ITEMS_PER_PAGE);
+    const paginatedGridVideos = gridVideos.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
     const getYoutubeEmbedUrl = (url: string) => {
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
@@ -39,7 +48,7 @@ export default function ImpactComponent() {
                     {/* Proof of Changes header */}
                     <div className="flex items-center justify-center gap-4 mb-2">
                         <div className="h-[1px] w-12 md:w-20 bg-gray-300"></div>
-                        <span className={`${caveat.className} text-xl md:text-2xl text-gray-500 font-bold italic`}>
+                        <span className={`${caveat.className} text-xl md:text-2xl text-[#6f7775] font-bold italic`}>
                             Proof of changes
                         </span>
                         <div className="h-[1px] w-12 md:w-20 bg-gray-300"></div>
@@ -64,7 +73,7 @@ export default function ImpactComponent() {
                 <div className="max-w-7xl mx-auto">
                     {/* Section Header */}
                     <div className="mb-12">
-                        <p className={`${caveat.className} text-xl md:text-2xl text-gray-500 font-bold italic mb-2 px-1 text-left`}>
+                        <p className={`${caveat.className} text-xl md:text-2xl text-[#6f7775] font-bold italic mb-2 px-1 text-left`}>
                             Words of reality
                         </p>
                         <h2 className={`${nunito.className} text-4xl md:text-5xl font-black leading-tight text-left text-[#1A2E35]`}>
@@ -148,8 +157,8 @@ export default function ImpactComponent() {
                     </div>
 
                     {/* Bottom Grid: 3 Columns */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {gridVideos.map((video) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                        {paginatedGridVideos.map((video) => (
                             <div key={video.id} className="group bg-white rounded-lg overflow-hidden flex flex-col shadow-sm border border-gray-100">
                                 <div className="relative aspect-[16/9] overflow-hidden">
                                     <Image
@@ -182,6 +191,40 @@ export default function ImpactComponent() {
                             </div>
                         ))}
                     </div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                        <div className="flex items-center justify-center gap-2">
+                            <button
+                                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                                disabled={currentPage === 1}
+                                className="flex items-center gap-1 px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-500 hover:border-[#00735C] hover:text-[#00735C] disabled:opacity-40 transition-all bg-white"
+                            >
+                                <ChevronLeft size={14} /> Previous
+                            </button>
+
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                <button
+                                    key={page}
+                                    onClick={() => setCurrentPage(page)}
+                                    className={`w-9 h-9 rounded-full text-sm font-bold transition-all ${currentPage === page
+                                        ? "bg-[#00735C] text-white shadow-md"
+                                        : "bg-white border border-gray-200 text-gray-500 hover:border-[#00735C] hover:text-[#00735C]"
+                                        }`}
+                                >
+                                    {page}
+                                </button>
+                            ))}
+
+                            <button
+                                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                                disabled={currentPage === totalPages}
+                                className="flex items-center gap-1 px-4 py-2 rounded-full border border-gray-200 text-sm font-semibold text-gray-500 hover:border-[#00735C] hover:text-[#00735C] disabled:opacity-40 transition-all bg-white"
+                            >
+                                Next <ChevronRight size={14} />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
 

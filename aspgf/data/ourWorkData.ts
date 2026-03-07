@@ -20,13 +20,23 @@ export const allWorkItems: WorkItem[] = [
     {
         id: 1,
         image: "/images/waari-image.png",
-        category: "Latest",
+        category: "Charity",
         date: "26/11/2025",
         title: "Vari Relief Program",
         description:
             "During the sacred Ashadhi Wari pilgrimage, our foundation organized a large-scale relief distribution program to support Warkaris walking long distances in challenging weather conditions.",
         featured: true,
     },
+    {
+        id: 10,
+        image: "/images/christmas-donations.png",
+        category: "Education",
+        date: "15/11/2025",
+        title: "Women Empowerment Seminar",
+        description:
+            "A seminar focused on skill development and entrepreneurship opportunities for underprivileged women.",
+    },
+
     {
         id: 2,
         image: "/images/donations-new.png",
@@ -44,6 +54,7 @@ export const allWorkItems: WorkItem[] = [
         title: "Beggar Rehabilitation Center",
         description:
             "A winter relief and community cleanliness initiative was conducted...",
+        // featured: true,
     },
     {
         id: 4,

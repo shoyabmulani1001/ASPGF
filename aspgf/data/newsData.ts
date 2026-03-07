@@ -122,4 +122,28 @@ export const newsData: NewsItem[] = [
         location: "Nashik",
         date: "15/08/2025",
     },
+    {
+        id: 15,
+        title: "Education awareness drive (Copy 2)",
+        category: "Education",
+        image: "/Images/News.webp",
+        location: "Nashik",
+        date: "15/08/2025",
+    },
+    {
+        id: 16,
+        title: "Education awareness drive (Copy 2)",
+        category: "Education",
+        image: "/Images/News.webp",
+        location: "Nashik",
+        date: "15/08/2025",
+    },
+    {
+        id: 17,
+        title: "Education awareness drive (Copy 2)",
+        category: "Education",
+        image: "/Images/News.webp",
+        location: "Nashik",
+        date: "15/08/2025",
+    },
 ];

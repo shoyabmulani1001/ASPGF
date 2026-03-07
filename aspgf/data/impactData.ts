@@ -46,7 +46,7 @@ export const videoStories: ImpactVideoStory[] = [
         location: "PUNE",
         year: "2023",
         duration: "0:31 min",
-        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w"
+        videoUrl: "https://youtu.be/h0vL5KjC-FI?si=R5fg0a2y_7-gQo9w",
     },
     {
         id: 4,

@@ -16,7 +16,7 @@ export default function OurWorkComponent() {
         <div className={`${cabin.className} bg-[#f9f9f9] min-h-screen`}>
             {/* Page Title */}
             <div className="px-6 md:px-10 lg:px-16 pt-8 pb-4">
-                <p className={`${caveat.className} text-3xl text-gray-400 font-bold tracking-widest`}>Our Work</p>
+                <p className={`${caveat.className} text-3xl text-[#6f7775] font-bold tracking-widest`}>Our Work</p>
             </div>
 
             {/* Main Layout: Sidebar + Content */}
