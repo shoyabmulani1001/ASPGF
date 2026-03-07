@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin, Menu, X } from "lucide-react";
-import { Nunito, Manrope } from "next/font/google";
+import { Nunito, Cabin } from "next/font/google";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800"] });
-const manrope = Manrope({
+const cabin = Cabin({
     subsets: ["latin"],
     weight: ["400", "500", "600", "700"],
 });
@@ -27,15 +27,15 @@ export function Navbar() {
 
     return (
         <header
-            className={`${manrope.className} w-full bg-white border-b border-gray-100`}
+            className={`${cabin.className} w-full bg-white border-b border-gray-100`}
         >
             {/* ================= TOP BAR ================= */}
-            <div className="hidden md:flex max-w-7xl mx-auto px-6 h-16 items-center justify-between">
+            <div className="hidden md:flex max-w-[1440px] mx-auto px-4 lg:px-10 h-16 items-center justify-between">
                 {/* LOGO */}
                 <div className="flex items-center mt-14 ">
-                    <div className="relative w-72 h-20 ">
+                    <div className="relative w-80 h-24 ">
                         <Image
-                            src="/Images/ASPGF_logo.webp"
+                            src="/Images/aspgf-logo.png"
                             alt="Anuja Sushant Patil Global Foundation"
                             fill
                             className="object-contain "
@@ -117,21 +117,21 @@ export function Navbar() {
                     </ul>
                 </nav>
 
-        {/* DONATE BUTTON (CONTACT) */}
-        <Link
-          href="/contactUs"
-          className="h-16 px-10 bg-[#C56BE3] hover:bg-purple-500 transition-all flex items-center gap-2 text-white font-black text-sm uppercase tracking-widest cursor-pointer whitespace-nowrap"
-        >
-          <Phone size={18} fill="white" />
-          <span>Contact</span>
-        </Link>
-      </div>
+                {/* DONATE BUTTON (CONTACT) */}
+                <Link
+                    href="/contactUs"
+                    className="h-16 px-10 bg-[#C56BE3] hover:bg-purple-500 transition-all flex items-center gap-2 text-white font-black text-sm uppercase tracking-widest cursor-pointer whitespace-nowrap"
+                >
+                    <Phone size={18} fill="white" />
+                    <span>Contact</span>
+                </Link>
+            </div>
 
             {/* ================= MOBILE HEADER ================= */}
             <div className="md:hidden flex items-center justify-between px-6 h-20 bg-white relative z-[110]">
-                <Link href="/" className="relative w-48 h-12">
+                <Link href="/" className="relative w-56 h-14">
                     <Image
-                        src="/Images/ASPGF_logo.webp"
+                        src="/Images/aspgf-logo.png"
                         alt="Logo"
                         fill
                         className="object-contain"
@@ -190,17 +190,17 @@ export function Navbar() {
                             </div>
                         </div>
 
-            <Link
-              href="/contactUs"
-              onClick={() => setIsMenuOpen(false)}
-              className="w-full py-4 bg-[#C56BE3] text-white rounded-2xl flex items-center justify-center gap-2 font-black uppercase tracking-[0.1em] shadow-lg shadow-purple-200"
-            >
-              <Phone size={18} fill="white" />
-              <span>Contact Us</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
+                        <Link
+                            href="/contactUs"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="w-full py-4 bg-[#C56BE3] text-white rounded-2xl flex items-center justify-center gap-2 font-black uppercase tracking-[0.1em] shadow-lg shadow-purple-200"
+                        >
+                            <Phone size={18} fill="white" />
+                            <span>Contact Us</span>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </header>
+    );
 }
