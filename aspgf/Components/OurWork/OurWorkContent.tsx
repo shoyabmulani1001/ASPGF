@@ -36,8 +36,10 @@ export default function OurWorkContent({ activeCategory, searchQuery }: OurWorkC
         return matchCategory && matchSearch;
     });
 
-    const featured = filtered.find((i) => i.featured);
-    const rest = filtered.filter((i) => !i.featured);
+    const isAllCategory = activeCategory === "All Category" && searchQuery === "";
+    const featuredItem = filtered.find((i) => i.featured);
+    const featured = isAllCategory ? featuredItem : null;
+    const rest = featured ? filtered.filter((i) => i.id !== featured.id) : filtered;
 
     const totalPages = Math.ceil(rest.length / ITEMS_PER_PAGE);
     const paginated = rest.slice(
@@ -50,24 +52,26 @@ export default function OurWorkContent({ activeCategory, searchQuery }: OurWorkC
 
             {/* Featured Card */}
             {featured && (
-                <div className="mb-8 rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm flex flex-col md:flex-row lg:min-h-[400px]">
-                    <div className="relative w-full md:w-[45%] shrink-0">
-                        <Image
-                            src={featured.image}
-                            alt={featured.title}
-                            width={800}
-                            height={500}
-                            className="w-full h-auto md:h-full object-cover rounded-2xl md:rounded-r-none p-2"
-                        />
+                <div className="mb-10 rounded-xl overflow-hidden border border-gray-100 bg-white shadow-md flex flex-col md:flex-row min-h-[350px] md:h-[450px]">
+                    <div className="relative w-full md:w-[60%] shrink-0 h-[280px] md:h-full p-3 md:p-4">
+                        <div className="relative w-full h-full overflow-hidden rounded-xl shadow-sm">
+                            <Image
+                                src={featured.image}
+                                alt={featured.title}
+                                fill
+                                priority
+                                className="object-cover"
+                            />
+                        </div>
                     </div>
-                    <div className="p-6 md:p-8 flex flex-col justify-center">
-                        <span className="inline-block text-[10px] font-extrabold tracking-widest uppercase bg-gray-100 text-gray-500 rounded-full px-3 py-1 mb-4 w-fit">
-                            {featured.category}
+                    <div className="p-8 md:p-10 flex flex-col justify-center flex-1">
+                        <span className="inline-block text-[11px] font-extrabold tracking-[0.2em] uppercase bg-[#00735C]/10 text-[#00735C] rounded-full px-4 py-1.5 mb-6 w-fit">
+                            Latest
                         </span>
-                        <h2 className={`${nunito.className} text-2xl md:text-3xl font-extrabold text-[#1A2E35] mb-3 leading-tight`}>
+                        <h2 className={`${nunito.className} text-3xl md:text-4xl font-extrabold text-[#1A2E35] mb-5 leading-tight`}>
                             {featured.title}
                         </h2>
-                        <p className="text-gray-500 text-sm leading-relaxed">
+                        <p className="text-gray-500 text-base leading-relaxed line-clamp-4 md:line-clamp-none font-medium">
                             {featured.description}
                         </p>
                     </div>
@@ -76,31 +80,30 @@ export default function OurWorkContent({ activeCategory, searchQuery }: OurWorkC
 
             {/* Grid of cards */}
             {paginated.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
                     {paginated.map((item) => (
                         <div
                             key={item.id}
-                            className="rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-sm hover:shadow-md transition-shadow duration-300 group flex flex-col h-full"
+                            className="rounded-xl overflow-hidden border border-gray-100 bg-white shadow-md hover:shadow-lg transition-all duration-300 group flex flex-col h-full"
                         >
-                            <div className="relative w-full overflow-hidden shrink-0">
+                            <div className="relative w-full h-60 sm:h-72 overflow-hidden shrink-0">
                                 <Image
                                     src={item.image}
                                     alt={item.title}
-                                    width={600}
-                                    height={400}
-                                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500 rounded-t-2xl"
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                                 />
                             </div>
-                            <div className="p-4 flex-1 flex flex-col">
-                                <div className="flex items-center justify-between mb-2">
-                                    <span className="text-[10px] font-extrabold tracking-widest uppercase text-[#00735C]">
+                            <div className="p-6 flex-1 flex flex-col">
+                                <div className="flex items-center justify-between mb-3">
+                                    <span className="text-[11px] font-extrabold tracking-widest uppercase text-[#00735C]">
                                         {item.category}
                                     </span>
                                     <span className="text-xs text-gray-400 font-medium">
                                         {item.date}
                                     </span>
                                 </div>
-                                <h3 className={`${nunito.className} font-extrabold text-[#1A2E35] text-lg mb-2 leading-snug`}>
+                                <h3 className={`${nunito.className} font-extrabold text-[#1A2E35] text-xl mb-3 leading-snug`}>
                                     {item.title}
                                 </h3>
                                 <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">

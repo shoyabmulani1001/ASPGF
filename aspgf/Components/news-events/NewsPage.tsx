@@ -1,17 +1,10 @@
-"use client";
+import NewsComponent from "@/Components/News/NewsComponent";
 
-import React, { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { newsData, Category, NewsItem } from "@/data/newsData";
-import Image from "next/image";
-import {
-  FiCalendar,
-  FiMapPin,
-  FiX,
-  FiArrowLeft,
-  FiArrowRight,
-} from "react-icons/fi";
-import { Caveat, Nunito, Cabin, Manrope } from "next/font/google";
+export const metadata = {
+  title: "News & Events - Anuja Sushant Patil Global Foundation",
+  description: "Stay updated with the latest news, events, and community initiatives from the Anuja Sushant Patil Global Foundation.",
+};
+
 
 const categories: Category[] = ["All", "Health", "Old Age", "Education"];
 
@@ -436,3 +429,8 @@ export default function NewsEvents() {
     </div>
   );
 }
+
+export default function NewsPage() {
+  return <NewsComponent />;
+}
+

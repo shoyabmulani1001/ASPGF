@@ -9,6 +9,7 @@ import {
     FaInstagram,
 } from "react-icons/fa";
 import { Nunito, Cabin } from "next/font/google";
+import { usePathname } from "next/navigation";
 
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800"] });
 const cabin = Cabin({
@@ -17,6 +18,17 @@ const cabin = Cabin({
 });
 
 export default function Footer() {
+    const pathname = usePathname();
+
+    const links = [
+        { label: "Home", href: "/" },
+        { label: "About us", href: "/AboutUs" },
+        { label: "Our Work", href: "/OurWork" },
+        { label: "News", href: "/News" },
+        { label: "Impact", href: "/Impact" },
+        { label: "Contact Us", href: "/contactUs" },
+    ];
+
     return (
         <footer
             className={`${cabin.className} w-full bg-[#0a7061] text-white pt-8 pb-0`}
@@ -71,31 +83,18 @@ export default function Footer() {
                             Quick Links
                         </h3>
 
-                        <div className="flex flex-wrap gap-4 text-[17px] font-bold">
-                            <Link
-                                href="/AboutUS"
-                                className="opacity-80 hover:opacity-100 hover:translate-x-1 transition-all inline-flex items-center"
-                            >
-                                About us
-                            </Link>
-                            <Link
-                                href="/contactUs"
-                                className="opacity-80 hover:opacity-100 hover:translate-x-1 transition-all inline-flex items-center"
-                            >
-                                Contact
-                            </Link>
-                            <Link
-                                href="/#news"
-                                className="opacity-80 hover:opacity-100 hover:translate-x-1 transition-all inline-flex items-center"
-                            >
-                                Latest News
-                            </Link>
-                            <a
-                                href="#"
-                                className="opacity-80 hover:opacity-100 hover:translate-x-1 transition-all inline-flex items-center"
-                            >
-                                Recent Events
-                            </a>
+                        <div className="flex flex-wrap gap-6 text-[17px] font-bold">
+                            {links
+                                .filter((link) => link.href !== pathname)
+                                .map((link) => (
+                                    <Link
+                                        key={link.href}
+                                        href={link.href}
+                                        className="opacity-80 hover:opacity-100 hover:translate-x-1 transition-all inline-flex items-center"
+                                    >
+                                        {link.label}
+                                    </Link>
+                                ))}
                         </div>
                     </div>
 
@@ -131,19 +130,13 @@ export default function Footer() {
             </div>
 
             {/* BOTTOM BAR */}
-            <div className="w-full bg-black/10 py-4 px-8 md:px-20 text-[14px] flex justify-between items-center flex-wrap text-white gap-4">
-                <p className="opacity-70 font-medium">
-                    Developed by{" "}
-                    <span className="font-extrabold text-white uppercase tracking-widest text-[12px]">
-                        seamedu
-                    </span>
-                </p>
+            <div className="w-full bg-[#004540] py-6 px-8 md:px-20 text-[14px] flex flex-col-reverse md:flex-row justify-between items-center text-white gap-6 md:gap-4">
 
-                <p className="opacity-70 text-center flex-1 font-medium">
+                <p className="opacity-70 text-center md:text-left md:pl-16 flex-1 font-medium">
                     © 2026 Anuja Sushant Patil Global Foundation. All Rights Reserved.
                 </p>
 
-                <div className="flex items-center gap-10 font-bold">
+                <div className="flex justify-between md:justify-end items-center w-full md:w-auto gap-6 md:gap-10 font-bold">
                     <a
                         href="#"
                         className="opacity-70 hover:opacity-100 transition-opacity"

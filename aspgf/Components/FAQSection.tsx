@@ -50,17 +50,9 @@ export default function FAQSection() {
           <div>
             {/* LABEL WITH ICON */}
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                <Image
-                  src="/icon.svg"
-                  alt="FAQ icon"
-                  width={20}
-                  height={20}
-                  className="object-contain"
-                />
-              </div>
+             
               <span
-                className={`${caveat.className} text-[#6F7775] text-[24px] font-bold tracking-wide mt-1`}
+                className={`${caveat.className} text-[#6f7775] text-[24px] font-bold tracking-wide mt-1`}
               >
                 Frequently asked Questions
               </span>
