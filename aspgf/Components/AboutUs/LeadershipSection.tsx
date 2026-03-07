@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { Nunito, Cabin } from "next/font/google";
@@ -9,83 +9,53 @@ const nunito = Nunito({ subsets: ["latin"], weight: ["400", "500", "600", "700",
 const cabin = Cabin({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export default function LeadershipSection() {
-    const sectionRef = useRef<HTMLElement | null>(null);
-
     useEffect(() => {
-        if (!sectionRef.current) return;
+        // Floating up and down animation for badges
+        gsap.to(".badge-trust", {
+            y: 10,
+            duration: 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: {
+                each: 0.2,
+                from: "random"
+            }
+        });
 
-        const ctx = gsap.context(() => {
-            gsap.from(".fade-up", {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                stagger: 0.1,
-                ease: "power3.out",
-            });
-
-            // Animate all Trustworthy badges
-            gsap.from(".badge-trust", {
-                y: -10,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "power2.out",
-            });
-
-            // Animate all Vision badges
-            gsap.from(".badge-vision", {
-                y: 10,
-                opacity: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                delay: 0.2,
-                ease: "power2.out",
-            });
-
-            // Floating animation (more noticeable but still premium)
-            gsap.utils.toArray<HTMLElement>(".badge-trust").forEach((badge, i) => {
-                gsap.to(badge, {
-                    y: 3.5,
-                    duration: 2.5 + Math.random(),
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: 1 + (i * 0.1),
-                });
-            });
-
-            gsap.utils.toArray<HTMLElement>(".badge-vision").forEach((badge, i) => {
-                gsap.to(badge, {
-                    y: -3.5,
-                    duration: 3 + Math.random(),
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut",
-                    delay: 1.2 + (i * 0.1),
-                });
-            });
-        }, sectionRef);
-
-        return () => ctx.revert();
+        gsap.to(".badge-vision", {
+            y: -10,
+            duration: 2.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            stagger: {
+                each: 0.2,
+                from: "random"
+            }
+        });
     }, []);
 
     return (
-        <section ref={sectionRef} className="bg-white py-20">
+        <section className="bg-white py-20">
             <div className="max-w-5xl mx-auto px-8 space-y-40">
                 {/* ================= SECTION 1: DR. SUSHANT PATIL ================= */}
-                <div className="fade-up">
-                    <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight mb-12 border-b-4 border-black inline-block leading-none pb-1`}>
-                        MESSAGE FROM THE FOUNDER
-                    </h2>
+                <div>
+                    <div className="mb-12">
+                        <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight leading-none pb-2`}>
+                            MESSAGE FROM THE FOUNDER
+                        </h2>
+                        <div className="h-1.5 w-32 bg-black rounded-full"></div>
+                    </div>
 
                     <div className="grid md:grid-cols-[0.8fr_1.2fr] gap-8 items-start">
                         <div className="relative flex flex-col items-start">
-                            <div className="absolute top-[-20px] left-[-20px] w-64 h-64 bg-teal-100/50 rounded-full blur-3xl -z-10"></div>
+
 
                             <div className="relative group w-full aspect-square max-w-[400px]">
                                 {/* Trustworthy Badge - Floating Outside */}
                                 <div className="badge-trust absolute -top-3 -left-3 text-black bg-white px-3 py-2.5 rounded-full text-[10px] font-bold flex items-center gap-1.5 shadow-xl z-20 w-fit">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                                     Trustworthy
                                 </div>
 
@@ -166,10 +136,13 @@ export default function LeadershipSection() {
                 </div>
 
                 {/* ================= SECTION 2: ANUJA PATIL ================= */}
-                <div className="fade-up">
-                    <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight mb-12 border-b-4 border-black inline-block leading-none pb-1`}>
-                        MESSAGE FROM THE FOUNDER
-                    </h2>
+                <div>
+                    <div className="mb-12">
+                        <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight leading-none pb-2`}>
+                            MESSAGE FROM THE FOUNDER
+                        </h2>
+                        <div className="h-1.5 w-32 bg-black rounded-full"></div>
+                    </div>
                     <div className="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-start">
                         <div className="grid grid-cols-2 gap-x-12 gap-y-10">
                             <div className="space-y-2">
@@ -223,11 +196,11 @@ export default function LeadershipSection() {
                             </div>
                         </div>
                         <div className="relative flex flex-col items-start">
-                            <div className="absolute top-[-20px] right-[-20px] w-64 h-64 bg-teal-100/50 rounded-full blur-3xl -z-10"></div>
+
                             <div className="relative group w-full aspect-square max-w-[400px]">
                                 {/* Trustworthy Badge - Floating Outside */}
                                 <div className="badge-trust absolute -top-3 -left-3 text-black bg-white px-3 py-2.5 rounded-full text-[10px] font-bold flex items-center gap-1.5 shadow-xl z-20 w-fit">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                                     Trustworthy
                                 </div>
 
@@ -257,20 +230,23 @@ export default function LeadershipSection() {
                 </div>
 
                 {/* ================= SECTION 3: DR. SHRIRAM CHAVAN ================= */}
-                <div className="fade-up">
-                    <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight mb-12 border-b-4 border-black inline-block leading-none pb-1`}>
-                        MESSAGE FROM PROJECT DIRECTOR
-                    </h2>
+                <div>
+                    <div className="mb-12">
+                        <h2 className={`${nunito.className} text-[26px] text-black font-black tracking-tight leading-none pb-2`}>
+                            MESSAGE FROM PROJECT DIRECTOR
+                        </h2>
+                        <div className="h-1.5 w-32 bg-black rounded-full"></div>
+                    </div>
 
                     <div className="grid md:grid-cols-[0.8fr_1.2fr] gap-8 items-start">
                         {/* RIGHT IMAGE SIDE (Moved to Left) */}
                         <div className="relative flex flex-col items-start">
-                            <div className="absolute top-[-20px] left-[-20px] w-64 h-64 bg-teal-100/50 rounded-full blur-3xl -z-10"></div>
+
 
                             <div className="relative group w-full aspect-square max-w-[400px]">
                                 {/* Trustworthy Badge - Floating Outside */}
                                 <div className="badge-trust absolute -top-3 -left-3 text-black bg-white px-3 py-2.5 rounded-full text-[10px] font-bold flex items-center gap-1.5 shadow-xl z-20 w-fit">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                                     Trustworthy
                                 </div>
 

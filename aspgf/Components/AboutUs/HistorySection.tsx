@@ -11,7 +11,39 @@ const caveat = Caveat({ subsets: ["latin"], weight: ["700"] });
 const nunito = Nunito({ subsets: ["latin"], weight: ["400", "700", "800"] });
 const cabin = Cabin({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
-const historyData = {
+// founding year
+const START_YEAR = 2023;
+const CURRENT_YEAR = new Date().getFullYear();
+
+const DEFAULT_CHARITY_INFO = {
+    title: "Continuing Our Mission",
+    points: [
+        {
+            head: "Community Empowerment.",
+            sub: ["Scaling our existing welfare programs.", "Reaching more underserved families."],
+        },
+        {
+            head: "Sustainable Impact.",
+            sub: [
+                "Strengthening our volunteer network.",
+                "Ensuring long-term support for educational projects.",
+            ],
+        },
+        {
+            head: "Initial Community Research.",
+            sub: ["Identified 10 high-need zones.", "Surveyed 500+ families."],
+        },
+        {
+            head: "Infrastructure Development.",
+            sub: [
+                "Built and renovated schools in underserved communities.",
+                "Supplied educational materials including textbooks and stationery.",
+            ],
+        },
+    ],
+};
+
+const historyData: Record<string, any> = {
     "2023": {
         year: "Year 2023",
         title: "Foundation Laid",
@@ -110,12 +142,56 @@ const historyData = {
             },
         ],
     },
+
+    "2026": {
+        year: "Year 2026",
+        title: "Foundation Laid",
+        points: [
+            {
+                head: "Initial Community Research.",
+                sub: ["Identified 10 high-need zones.", "Surveyed 500+ families."],
+            },
+            {
+                head: "Infrastructure Development.",
+                sub: [
+                    "Built and renovated schools in underserved communities.",
+                    "Supplied educational materials including textbooks and stationery.",
+                ],
+            },
+            {
+                head: "Initial Community Research.",
+                sub: ["Identified 10 high-need zones.", "Surveyed 500+ families."],
+            },
+            {
+                head: "Infrastructure Development.",
+                sub: [
+                    "Built and renovated schools in underserved communities.",
+                    "Supplied educational materials including textbooks and stationery.",
+                ],
+            },
+        ],
+    },
 };
 
-type YearKey = keyof typeof historyData;
+// Generate years dynamically
+const ALL_YEARS = Array.from(
+    { length: CURRENT_YEAR - START_YEAR + 1 },
+    (_, i) => (CURRENT_YEAR - i).toString()
+);
 
 export default function HistorySection(): JSX.Element {
-    const [activeYear, setActiveYear] = useState<YearKey>("2024");
+    const [activeYear, setActiveYear] = useState<string>(CURRENT_YEAR.toString());
+
+    // Helper to get data for a year
+    const getYearData = (year: string) => {
+        const data = historyData[year] || { ...DEFAULT_CHARITY_INFO, year: `Year ${year}` };
+        return {
+            ...data,
+            year: data.year || `Year ${year}`
+        };
+    };
+
+    const currentData = getYearData(activeYear);
 
     const sectionRef = useRef<HTMLDivElement | null>(null);
     const contentRef = useRef<HTMLDivElement | null>(null);
@@ -132,36 +208,57 @@ export default function HistorySection(): JSX.Element {
                 scrollTrigger: {
                     trigger: ".image-container",
                     start: "top 85%",
-                },
+                }
             });
 
             gsap.fromTo(
                 ".float-image-back",
-                { y: 0, filter: "blur(8px)", scale: 0.92 },
+                { y: 0, x: 0, scale: 1, rotate: 3, filter: "blur(0px)", opacity: 1, zIndex: 20 },
                 {
-                    y: 25,
-                    filter: "blur(0px)",
-                    scale: 1,
-                    duration: 3.5,
+                    y: 35,
+                    x: 10,
+                    scale: 0.95,
+                    rotate: 2,
+                    filter: "blur(8px)",
+                    opacity: 0.8,
+                    zIndex: 10,
+                    duration: 5,
                     repeat: -1,
                     yoyo: true,
-                    ease: "sine.inOut",
+                    ease: "power1.inOut",
+                    force3D: true,
                 }
             );
 
             gsap.fromTo(
                 ".float-image-front",
-                { y: 0, filter: "blur(0px)", scale: 1 },
+                { y: 0, x: 0, scale: 0.95, rotate: -3, filter: "blur(8px)", opacity: 0.8, zIndex: 10 },
                 {
-                    y: -25,
-                    filter: "blur(8px)",
-                    scale: 0.92,
-                    duration: 3.5,
+                    y: -35,
+                    x: -10,
+                    scale: 1,
+                    rotate: -4,
+                    filter: "blur(0px)",
+                    opacity: 1,
+                    zIndex: 20,
+                    duration: 5,
                     repeat: -1,
                     yoyo: true,
-                    ease: "sine.inOut",
+                    ease: "power1.inOut",
+                    force3D: true,
                 }
             );
+            gsap.from(".float-text-container > *", {
+                y: 40,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.1,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".float-text-container",
+                    start: "top 85%",
+                }
+            });
         }, sectionRef);
 
         return () => ctx.revert();
@@ -183,16 +280,16 @@ export default function HistorySection(): JSX.Element {
             className="bg-white relative overflow-hidden pt-12 md:pt-16 pb-28 md:pb-40"
         >
             {/* Background */}
-            <div className="absolute left-0 top-0 bottom-12 w-full md:w-[50vw] bg-[#00735C] rounded-br-[60px] rounded-tr-[60px] z-0"></div>
+            <div className="absolute left-0 top-0 md:top-24 h-[480px] md:h-auto md:bottom-40 w-full md:w-[50vw] bg-[#00735C] rounded-br-[60px] rounded-tr-[60px] z-0"></div>
 
             <div className="relative z-10 w-full px-6 md:px-12 lg:px-24 max-w-[1400px] mx-auto">
-                <div className="grid md:grid-cols-[1fr_1fr] items-center gap-12 lg:gap-20">
+                <div className="grid md:grid-cols-[1fr_1fr] items-center gap-24 lg:gap-32">
 
                     {/* LEFT IMAGES */}
-                    <div className="image-container relative flex justify-center items-center py-8 md:py-12">
-                        <div className="relative w-full aspect-[4/5] max-w-[280px] md:max-w-[420px]">
+                    <div className="image-container relative flex justify-center md:justify-start items-start md:items-center -mt-5 md:mt-0 pt-0 pb-8 md:py-12">
+                        <div className="relative w-full aspect-[4/5] max-w-[320px] md:max-w-[520px]">
 
-                            <div className="float-image-back absolute top-0 right-[-8%] z-10 w-[80%] border-[10px] border-white rounded-3xl overflow-hidden shadow-2xl">
+                            <div className="float-image-back absolute top-0 right-[-5%] w-[85%] border-[10px] border-white rounded-3xl overflow-hidden shadow-2xl">
                                 <Image
                                     src="/Images/WhatWeDo2.webp"
                                     alt="Community work"
@@ -203,7 +300,7 @@ export default function HistorySection(): JSX.Element {
                                 />
                             </div>
 
-                            <div className="float-image-front absolute bottom-[-10%] left-[-5%] z-20 w-[80%] border-[10px] border-white rounded-[32px] overflow-hidden shadow-xl">
+                            <div className="float-image-front absolute bottom-[-10%] left-[-4%] w-[85%] border-[10px] border-white rounded-[32px] overflow-hidden shadow-xl">
                                 <Image
                                     src="/Images/about-image.png"
                                     alt="Family support"
@@ -218,50 +315,53 @@ export default function HistorySection(): JSX.Element {
                     </div>
 
                     {/* RIGHT CONTENT */}
-                    <div className="py-6 pl-12">
+                    <div className="py-6 pl-0 md:pl-16 float-text-container">
 
                         <div className="flex items-center gap-2 mb-3">
-                            <span className={`${caveat.className} text-gray-400 text-2xl`}>
+                            <span className={`${caveat.className} text-[#6F7775] text-2xl`}>
                                 Our History
                             </span>
                         </div>
 
-                        <h2 className={`${nunito.className} text-[36px] md:text-[42px] font-extrabold text-[#00735C] mb-6`}>
+                        <h2 className={`${nunito.className} text-[36px] md:text-[42px] font-extrabold text-[#00735C] mb-4`}>
                             Journey Was Started
                         </h2>
+                        <div className="h-1.5 w-48 bg-[#00735C] rounded-full mb-8"></div>
 
                         {/* YEAR TABS */}
                         <div className={`${nunito.className} flex gap-4 mb-8`}>
-                            {(Object.keys(historyData) as YearKey[])
-                                .sort((a, b) => Number(a) - Number(b))
-                                .map((year) => (
-                                    <button
-                                        key={year}
-                                        onClick={() => setActiveYear(year)}
-                                        className={`px-6 py-2 rounded-full text-[13px] font-extrabold transition-all ${activeYear === year
-                                            ? "text-[#00735C] border-2 border-[#00735C] bg-[#e6f1ef]"
-                                            : "text-gray-400 hover:text-gray-600"
-                                            }`}
-                                    >
-                                        {year}
-                                    </button>
-                                ))}
+                            {ALL_YEARS.map((year: string) => (
+                                <button
+                                    key={year}
+                                    onClick={() => setActiveYear(year)}
+                                    className={`px-6 py-2 rounded-full text-[13px] font-extrabold transition-all ${activeYear === year
+                                        ? "text-[#00735C] border-2 border-[#00735C] bg-[#e6f1ef]"
+                                        : "text-gray-400 hover:text-gray-600"
+                                        }`}
+                                >
+                                    {year}
+                                </button>
+                            ))}
                         </div>
 
                         <div ref={contentRef}>
                             <p className={`${nunito.className} text-[#00735C] font-extrabold mb-2 text-sm`}>
-                                {historyData[activeYear].year}
+                                {currentData.year}
                             </p>
 
+                            <h3 className={`${nunito.className} text-[24px] font-extrabold text-gray-900 mb-6`}>
+                                {currentData.title}
+                            </h3>
+
                             <ul className="space-y-4">
-                                {historyData[activeYear].points.map((item, idx) => (
+                                {currentData.points.map((item: any, idx: number) => (
                                     <li key={idx}>
                                         <p className={`${cabin.className} font-bold text-gray-900 text-[15px]`}>
                                             {item.head}
                                         </p>
 
                                         <ul className="mt-2 space-y-1">
-                                            {item.sub.map((subItem, sIdx) => (
+                                            {item.sub.map((subItem: string, sIdx: number) => (
                                                 <li
                                                     key={sIdx}
                                                     className={`${cabin.className} text-gray-600 text-sm`}

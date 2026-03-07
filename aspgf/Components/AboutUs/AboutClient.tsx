@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Target, Eye, Heart, ArrowRight } from "lucide-react";
 import { Caveat, Nunito, Cabin } from "next/font/google";
 
@@ -15,16 +16,45 @@ export default function AboutClient() {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        if (!sectionRef.current) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const ctx = gsap.context(() => {
+            // Left content animation
+            gsap.from(".about-content > *", {
+                x: -50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".about-content",
+                    start: "top 80%",
+                }
+            });
 
-        gsap.from(".fade-up", {
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.1
-        });
+            // Tab buttons animation
+            gsap.from(".tab-btn", {
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "back.out(1.7)",
+                scrollTrigger: {
+                    trigger: ".tab-btn-container",
+                    start: "top 85%",
+                }
+            });
+        }, sectionRef);
 
+        return () => ctx.revert();
     }, []);
+
+    useEffect(() => {
+        // Simple entry animation for tab content whenever it changes
+        gsap.fromTo(".fade-up",
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }
+        );
+    }, [activeTab]);
 
     return (
         <section ref={sectionRef} className="py-24 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto">
@@ -32,13 +62,14 @@ export default function AboutClient() {
             <div className="flex flex-col lg:flex-row gap-16">
 
                 {/* LEFT CONTENT */}
-                <div className="lg:w-[45%]">
-                    <p className={`${caveat.className} text-[#00735C] text-3xl mb-4 font-normal`}>
+                <div className="lg:w-[45%] about-content">
+                    <p className={`${caveat.className} text-[#6F7775] text-3xl mb-4 font-normal`}>
                         Our Approach
                     </p>
-                    <h2 className={`${nunito.className} text-[#0A2520] text-4xl font-extrabold mb-6`}>
+                    <h2 className={`${nunito.className} text-[#0A2520] text-4xl font-extrabold mb-4`}>
                         Building a Sustainable Future with Innovation
                     </h2>
+                    <div className="h-1 w-40 bg-[#00735C] rounded-full mb-8"></div>
 
                     <p className={`${cabin.className} text-gray-600 mb-8 font-normal`}>
                         We believe transformation starts from the ground up.
@@ -51,11 +82,11 @@ export default function AboutClient() {
                 <div className="lg:w-[55%]">
 
                     {/* TAB BUTTONS */}
-                    <div className="flex bg-gray-100 rounded-xl p-2 mb-8">
+                    <div className="flex bg-gray-100 rounded-xl p-2 mb-8 tab-btn-container">
 
                         <button
                             onClick={() => setActiveTab("mission")}
-                            className={`${nunito.className} flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "mission" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
+                            className={`${nunito.className} tab-btn flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "mission" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
                                 }`}
                         >
                             <Target className="mx-auto mb-1" />
@@ -64,7 +95,7 @@ export default function AboutClient() {
 
                         <button
                             onClick={() => setActiveTab("vision")}
-                            className={`${nunito.className} flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "vision" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
+                            className={`${nunito.className} tab-btn flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "vision" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
                                 }`}
                         >
                             <Eye className="mx-auto mb-1" />
@@ -73,7 +104,7 @@ export default function AboutClient() {
 
                         <button
                             onClick={() => setActiveTab("value")}
-                            className={`${nunito.className} flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "value" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
+                            className={`${nunito.className} tab-btn flex-1 py-4 rounded-lg font-extrabold transition-colors ${activeTab === "value" ? "bg-[#00735C] text-white" : "text-[#0A2520] hover:text-[#00735C]"
                                 }`}
                         >
                             <Heart className="mx-auto mb-1" />
@@ -84,7 +115,7 @@ export default function AboutClient() {
 
                     {/* TAB CONTENT */}
                     {activeTab === "mission" && (
-                        <div className="fade-up">
+                        <div>
                             <p className={`${cabin.className} text-gray-600 mb-6 font-normal`}>
                                 Our mission is to build inclusive platforms that empower
                                 communities through education, healthcare, and

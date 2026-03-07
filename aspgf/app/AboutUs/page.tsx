@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 import AboutClient from "@/Components/AboutUs/AboutClient";
-import HeroSection from "@/Components/HeroSection";
+import AboutHero from "@/Components/AboutUs/AboutHero";
 import LeadershipSection from "@/Components/AboutUs/LeadershipSection";
 import HistorySection from "@/Components/AboutUs/HistorySection";
+import StatsSection from "@/Components/StatsSection";
 
 export const metadata: Metadata = {
     title: "About Us | Global Foundation",
@@ -21,11 +22,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <main className="w-full bg-white">
-            {/* HERO SECTION (SERVER RENDERED FOR SEO) */}
-            <HeroSection />
+            {/* HERO SECTION specifically for About Us */}
+            <AboutHero />
 
             {/* CLIENT PART */}
             <AboutClient />
+
+            <StatsSection />
 
             {/* LEADERSHIP PORTFOLIO PART */}
             <LeadershipSection />

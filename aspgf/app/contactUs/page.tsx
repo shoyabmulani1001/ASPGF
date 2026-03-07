@@ -410,7 +410,7 @@ export default function ContactPage() {
                         Get In Touch
                     </p>
 
-                    <h1 className={`${nunito.className} text-[#0A2520] text-4xl md:text-5xl font-normal mb-6`}>
+                    <h1 className={`${nunito.className} text-[#0A2520] text-4xl md:text-5xl font-extrabold mb-6`}>
                         Feel free to reach out with any questions or feedback.
                     </h1>
 
@@ -429,7 +429,7 @@ export default function ContactPage() {
                                 <MapPin className="text-[#00735C]" size={16} />
                             </div>
 
-                            <p className={`${nunito.className} text-[10px] font-normal text-[#00735C] uppercase tracking-wider mb-1`}>
+                            <p className={`${nunito.className} text-[10px] font-extrabold text-[#00735C] uppercase tracking-wider mb-1`}>
                                 Address
                             </p>
 
@@ -446,7 +446,7 @@ export default function ContactPage() {
                                     <Phone className="text-[#00735C]" size={16} />
                                 </div>
 
-                                <p className={`${nunito.className} text-[10px] font-normal text-[#00735C] uppercase tracking-wider mb-1`}>
+                                <p className={`${nunito.className} text-[10px] font-extrabold text-[#00735C] uppercase tracking-wider mb-1`}>
                                     Helpline
                                 </p>
 
@@ -461,7 +461,7 @@ export default function ContactPage() {
                                     <span className="text-[#00735C] font-semibold text-base">@</span>
                                 </div>
 
-                                <p className={`${nunito.className} text-[10px] font-normal text-[#00735C] uppercase tracking-wider mb-1`}>
+                                <p className={`${nunito.className} text-[10px] font-extrabold text-[#00735C] uppercase tracking-wider mb-1`}>
                                     Email
                                 </p>
 
@@ -481,7 +481,7 @@ export default function ContactPage() {
                     {/* MAP */}
                     <div className="w-full h-72 sm:h-80 lg:h-[360px] bg-gray-100 rounded-[32px] overflow-hidden relative shadow-sm">
                         <iframe
-                            src="https://maps.google.com/maps?q=Seamedu,+Solitaire+Business+Hub,+Balewadi,+Pune&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            src="https://maps.google.com/maps?q=Seamedu%20%2F%20Toolbox%20Studio%2C%206th%20Floor%2C%20Solitaire%20Business%20Hub%2C%20Office%20No.%20612%2C%20Balewadi%20High%20St%2C%20Balewadi%2C%20Pune%2C%20Maharashtra%20411045&t=&z=17&ie=UTF8&iwloc=&output=embed"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -492,10 +492,15 @@ export default function ContactPage() {
                         ></iframe>
                         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:right-5 w-[90%] sm:w-[280px] bg-white/95 backdrop-blur-md p-4 rounded-2xl flex items-center justify-between shadow-lg">
                             <div>
-                                <p className={`${cabin.className} text-[13px] font-normal text-[#1A2E35]`}>Balewadi, Pune</p>
-                                <p className={`${cabin.className} text-[10px] text-gray-500 font-normal mt-0.5`}>Main Headquarters</p>
+                                <p className={`${cabin.className} text-[13px] font-extrabold text-[#1A2E35]`}>Solitaire Business Hub</p>
+                                <div className="mt-0.5 flex items-center gap-1.5">
+                                    <span className={`w-[5px] h-[5px] rounded-full ${new Date().getDay() !== 0 ? 'bg-[#00735C] animate-pulse' : 'bg-red-500'}`}></span>
+                                    <p className={`${cabin.className} text-[10px] ${new Date().getDay() !== 0 ? 'text-[#00735C]' : 'text-red-500'} font-extrabold uppercase tracking-widest`}>
+                                        {new Date().getDay() !== 0 ? 'Open Now' : 'Closed Now'}
+                                    </p>
+                                </div>
                             </div>
-                            <a href="https://maps.google.com/?q=Seamedu,+Solitaire+Business+Hub,+Balewadi,+Pune" target="_blank" className={`${cabin.className} bg-[#00735C] text-white text-[9px] tracking-wider font-normal px-4 py-2.5 rounded-lg hover:bg-[#005c49] transition-colors`}>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Seamedu+%2F+Toolbox+Studio%2C+6th+Floor%2C+Solitaire+Business+Hub%2C+Office+No.+612%2C+Balewadi+High+St%2C+Balewadi%2C+Pune%2C+Maharashtra+411045" target="_blank" className={`${cabin.className} bg-[#00735C] text-white text-[9px] tracking-wider font-extrabold px-4 py-2.5 rounded-lg hover:bg-[#005c49] transition-colors`}>
                                 GET DIRECTIONS
                             </a>
                         </div>
@@ -504,7 +509,10 @@ export default function ContactPage() {
                     {/* OFFICE HOURS CARD */}
                     <div className="bg-white rounded-[32px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100/60">
                         <div className="flex items-center justify-between mb-2">
-                            <h3 className={`${nunito.className} text-[22px] font-normal text-[#1A2E35]`}>Office Hours</h3>
+                            <div className="flex flex-col">
+                                <h3 className={`${nunito.className} text-[22px] font-extrabold text-[#1A2E35]`}>Solitaire Business Hub</h3>
+                                <p className={`${cabin.className} text-[#00735C] text-[10px] font-extrabold uppercase tracking-widest mt-1`}>Operating Hours</p>
+                            </div>
 
                             {new Date().getDay() !== 0 ? (
                                 <div className={`${cabin.className} bg-[#D5EBE1] text-[#00735C] text-[10px] font-normal px-3 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-widest`}>
